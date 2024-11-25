@@ -1,4 +1,4 @@
-FLAGS=-O2 -fpermissive
+FLAGS=-O2 -fpermissive -fopenmp
 
 CC=g++
 
@@ -9,12 +9,12 @@ EXEC=bucketsort
 all: $(EXEC)
 
 $(EXEC): main.c bucketsort.c bucketsort.h
-	$(CC) $(FLAGS) $(EXEC).c -c -o $(EXEC).o
+	$(CC) $(FLAGS) bucketsort.c -c -o bucketsort.o
 	$(CC) $(FLAGS) main.c -c -o main.o
-	$(CC) $(FLAGS) main.o $(EXEC).o -o $(EXEC)
+	$(CC) $(FLAGS) main.o bucketsort.o -o $(EXEC)
 
 run:
 	./$(EXEC)
 
 clean:
-	$(RM) main.o $(EXEC).o $(EXEC)
+	$(RM) main.o bucketsort.o $(EXEC)
